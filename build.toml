@@ -1,0 +1,14 @@
+default = "build"
+
+[step.build]
+depends = ["buildLib", "buildMain"]
+
+[step.run]
+command = "./bin/brainfuck2 example.bf"
+depends = ["build"]
+
+[step.buildMain]
+command = "mkdir -p bin; clang ./bin/libfuncs.so src/*.c -o bin/brainfuck2"
+
+[step.buildLib]
+command = "mkdir -p bin; clang -fPIC -shared lib/funcs/*.c -o bin/libfuncs.so"
